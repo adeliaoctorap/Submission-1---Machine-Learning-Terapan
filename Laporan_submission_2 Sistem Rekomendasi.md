@@ -1,6 +1,8 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Adelia Octora Pristisahida
 
 ## Domain Proyek
+Latar belakang proyek ini berfokus pada analisis dan rekomendasi film menggunakan dataset MovieLens 100k. Dataset ini mencakup 100.000 ulasan pengguna tentang berbagai film, yang menyediakan wawasan berharga tentang preferensi penonton. Dengan semakin populernya platform streaming, penting untuk memahami pola preferensi dan menciptakan sistem rekomendasi yang efektif. Proyek ini bertujuan untuk memanfaatkan algoritma machine learning dalam memberikan rekomendasi film yang relevan dan personal, meningkatkan pengalaman pengguna dalam memilih film yang sesuai dengan selera mereka.
+
 
 Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
 
