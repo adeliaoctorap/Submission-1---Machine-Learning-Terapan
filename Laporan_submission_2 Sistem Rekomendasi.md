@@ -20,65 +20,58 @@ Masalah utama yang dihadapi adalah kesulitan pengguna dalam menemukan film yang 
 Pengguna sering kali menghadapi “information overload” saat memilih film di platform streaming karena jumlah pilihan yang sangat banyak. Tanpa bantuan sistem rekomendasi, pengguna mungkin sulit menemukan film yang sesuai dengan minat atau preferensi mereka, sehingga pengalaman menonton menjadi kurang memuaskan. Oleh karena itu, perlu adanya sistem rekomendasi yang dapat mempermudah pengguna dalam menemukan film yang relevan berdasarkan preferensi mereka.
 #### 2. Kurangnya personalisasi rekomendasi yang mempertimbangkan preferensi unik setiap pengguna
 Setiap pengguna memiliki preferensi yang berbeda terhadap genre, gaya, dan jenis film. Tanpa analisis yang akurat terhadap pola preferensi pengguna, sistem rekomendasi yang disediakan cenderung memberikan rekomendasi yang bersifat umum dan kurang personal. Hal ini menurunkan efektivitas rekomendasi dan tidak memaksimalkan kepuasan pengguna. Dibutuhkan pendekatan yang dapat menangkap karakteristik dan kebiasaan menonton masing-masing pengguna secara akurat.
-#### 3. Terbatasnya kemampuan sistem rekomendasi dalam menangani pengguna baru dan film baru (masalah cold start)
-Pengguna baru atau film yang baru ditambahkan seringkali tidak memiliki data rating yang cukup, sehingga sistem rekomendasi kesulitan memberikan rekomendasi yang akurat. Masalah ini disebut “cold start problem,” di mana sistem tidak memiliki cukup informasi historis untuk menentukan preferensi pengguna atau relevansi suatu film. Penyelesaian masalah ini memerlukan pendekatan algoritmik yang dapat memberikan rekomendasi meskipun data historis masih terbatas.
-#### 4. Keterbatasan algoritma rekomendasi dalam memproses data besar secara efisien
-Sistem rekomendasi membutuhkan analisis data yang besar dan kompleks, terutama pada dataset seperti MovieLens 100k, yang memiliki ribuan pengguna dan ribuan film. Algoritma yang tidak efisien akan membutuhkan waktu komputasi yang lebih lama, membebani sumber daya, dan menghasilkan hasil yang kurang responsif. Diperlukan metode yang lebih efisien dan optimal dalam memproses data besar agar sistem dapat berfungsi dengan baik di lingkungan nyata.
-#### 5. Kurangnya evaluasi yang berkelanjutan untuk meningkatkan keakuratan sistem rekomendasi
-Model rekomendasi perlu terus dievaluasi dan disempurnakan agar tetap relevan dan akurat seiring perubahan pola preferensi pengguna dan penambahan data baru. Tanpa evaluasi berkelanjutan, sistem rekomendasi dapat kehilangan efektivitasnya seiring waktu. Oleh karena itu, dibutuhkan rencana evaluasi rutin yang menggunakan metrik yang tepat untuk mengukur keberhasilan dan efektivitas rekomendasi yang diberikan oleh sistem.
 
 ### Goals
 #### 1. Meningkatkan kemampuan sistem rekomendasi dalam menyaring pilihan film sesuai minat pengguna
 Untuk mengatasi "information overload" yang dirasakan pengguna, tujuan utamanya adalah menyediakan rekomendasi yang sesuai dengan selera pengguna, sehingga mereka tidak perlu mencari film secara manual. Dengan content-based filtering, sistem dapat merekomendasikan film berdasarkan fitur dari film yang disukai pengguna, seperti genre, sutradara, atau aktor. Sebagai contoh, jika seorang pengguna cenderung menyukai film ber-genre “Drama” dan “Romance,” sistem akan merekomendasikan film dengan genre yang serupa.
 #### 2. Menyediakan rekomendasi yang lebih personal dengan menyesuaikan fitur konten film berdasarkan preferensi pengguna
-Penting untuk meningkatkan tingkat personalisasi rekomendasi sehingga sesuai dengan minat unik setiap pengguna. Content-based filtering dapat membantu dengan cara menyesuaikan rekomendasi berdasarkan kesamaan konten antara film yang sudah ditonton dan yang akan direkomendasikan. Pendekatan ini memungkinkan sistem untuk membuat profil pengguna berdasarkan film yang disukai, lalu mencocokkannya dengan film-film yang memiliki karakteristik serupa. Dengan begitu, rekomendasi yang diberikan lebih spesifik dan relevan.
+Content-based filtering dapat membantu dengan cara menyesuaikan rekomendasi berdasarkan kesamaan konten antara film yang sudah ditonton dan yang akan direkomendasikan. Pendekatan ini memungkinkan sistem untuk membuat profil pengguna berdasarkan film yang disukai, lalu mencocokkannya dengan film-film yang memiliki karakteristik serupa. Dengan begitu, rekomendasi yang diberikan lebih spesifik dan relevan.
+#### 3. Mengoptimalkan efisiensi sistem rekomendasi dengan pendekatan berbasis konten yang dapat dikembangkan secara modular
+Pendekatan content-based filtering lebih efisien dalam hal pemrosesan data karena sistem hanya perlu mengandalkan fitur konten dari film dan profil pengguna. 
 
-Jawaban Pernyataan Masalah 3
-Mengurangi dampak masalah cold start bagi pengguna baru dengan memanfaatkan preferensi konten eksplisit
-Masalah cold start sering kali memengaruhi pengguna baru yang belum memiliki riwayat preferensi. Solusi content-based filtering dapat memanfaatkan informasi eksplisit dari pengguna baru, seperti preferensi genre atau rating awal yang diberikan pada beberapa film, untuk membangun profil preferensi awal. Berdasarkan data ini, sistem dapat memberikan rekomendasi film yang sesuai meskipun pengguna belum memiliki banyak riwayat menonton, sehingga pengalaman pengguna baru tetap personal dan memuaskan.
+### Solution statements
+#### 1. Membangun Model Content-Based Filtering Berbasis Similarity (Cosine Similarity dan TF-IDF)
+Deskripsi Solusi: Model pertama akan menggunakan pendekatan Content-Based Filtering dengan representasi fitur film berdasarkan metadata seperti genre, sutradara, atau aktor. Metode yang digunakan untuk mengukur kesamaan antar film adalah Cosine Similarity pada vektor TF-IDF. Dengan pendekatan ini, sistem akan merekomendasikan film yang mirip berdasarkan konten yang telah ditonton pengguna sebelumnya.
+#### 2. Menambahkan Metode Evaluasi
+Metrik evaluasi yang digunakan adalah Mean Average Precision (MAP), Recall@k, dan Precision@K, untuk mengukur seberapa relevan rekomendasi yang diberikan oleh model. Hasil ini akan memberikan gambaran akurasi dari rekomendasi berdasarkan similaritas antar film.
 
-Jawaban Pernyataan Masalah 4
-Mengoptimalkan efisiensi sistem rekomendasi dengan pendekatan berbasis konten yang dapat dikembangkan secara modular
-Pendekatan content-based filtering lebih efisien dalam hal pemrosesan data karena sistem hanya perlu mengandalkan fitur konten dari film dan profil pengguna. Sistem ini dapat dikembangkan secara modular, di mana profil pengguna diperbarui secara berkala dengan menganalisis konten dari film yang telah mereka tonton. Selain itu, content-based filtering tidak membutuhkan data pengguna lain untuk melakukan rekomendasi, sehingga pemrosesan bisa lebih cepat dan tidak bergantung pada rating dari pengguna lain.
-
-Jawaban Pernyataan Masalah 5
-Menerapkan evaluasi yang berkelanjutan untuk meningkatkan akurasi rekomendasi konten
-Agar sistem rekomendasi tetap efektif, perlu dilakukan evaluasi berkelanjutan menggunakan metrik evaluasi yang tepat, seperti precision atau recall, yang mengukur relevansi rekomendasi yang diberikan. Melalui evaluasi ini, sistem dapat dioptimalkan berdasarkan umpan balik pengguna atau akurasi hasil rekomendasi yang diberikan. Content-based filtering memungkinkan pemantauan terus-menerus terhadap pola preferensi pengguna, karena sistem dapat memperbarui profil pengguna sesuai dengan film yang baru saja mereka tonton.
-
-Goals Utama Proyek dengan Content-Based Filtering
-Memberikan rekomendasi yang relevan: Memastikan bahwa setiap rekomendasi sesuai dengan preferensi konten pengguna, sehingga meningkatkan kepuasan dan pengalaman pengguna dalam menemukan film yang menarik.
-Meningkatkan personalisasi: Membangun profil pengguna berdasarkan film yang disukai dan memberikan rekomendasi film serupa dengan fitur yang sama, sehingga pengalaman menonton lebih dipersonalisasi.
-Mengatasi cold start: Memanfaatkan fitur konten untuk memberikan rekomendasi kepada pengguna baru, bahkan ketika mereka belum memiliki riwayat yang panjang.
-Efisiensi pemrosesan: Mengurangi ketergantungan pada data pengguna lain dengan menggunakan informasi konten, sehingga mempercepat proses rekomendasi.
-Pemeliharaan berkelanjutan: Memperbarui profil pengguna sesuai dengan film yang ditonton, memungkinkan sistem untuk terus relevan dan akurat dalam jangka panjang.
-Pendekatan content-based filtering ini dapat diimplementasikan secara efektif dalam proyek, di mana setiap tujuan diarahkan untuk menjawab permasalahan utama dengan solusi yang dapat diukur dan dioptimalkan seiring waktu.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
-
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+Dataset yang digunakan dalam proyek ini adalah MovieLens 100k, yang merupakan salah satu dataset paling populer untuk penelitian sistem rekomendasi. Dataset ini terdiri dari 100.000 penilaian film yang diberikan oleh pengguna yang berbeda, termasuk informasi tentang film, pengguna, dan genre film. Dengan struktur data yang kaya, MovieLens 100k memungkinkan analisis yang mendalam mengenai preferensi pengguna dan karakteristik film, yang sangat sesuai untuk pendekatan content-based filtering. Data ini dapat diunduh dari situs resmi MovieLens:[MovieLens 100k Dataset](https://grouplens.org/datasets/movielens/100k/).
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
-
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
+### Variabel-variabel pada MovieLens 100k dataset adalah sebagai berikut:
+Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan dalam sistem rekomendasi yang dibangun, antara lain:
+u.data: File ini berisi informasi penilaian dengan kolom user_id, movie_id, rating, dan timestamp.
+u.item: File ini berisi informasi tentang film dengan kolom movie_id, title, dan genres.
+u.user: File ini berisi informasi tentang penguna dengan kolom user_id, age, gender, occupation, dan zip_code 
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+Dalam upaya memahami dataset MovieLens 100k, langkah yang diambil adalah melakukan Univariate Exploratory Data Analysis (EDA). Univariate EDA berfokus pada analisis satu variabel pada satu waktu untuk mendapatkan wawasan yang lebih dalam tentang distribusi dan karakteristik data. Beberapa tahapan yang dilakukan dalam analisis ini meliputi:
+1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi.
+2. Visualisasi Genre Film: Dengan menggunakan diagram lingkaran atau grafik batang, kita dapat menganalisis proporsi berbagai genre film dalam dataset. Ini akan memberikan gambaran tentang genre mana yang paling banyak tersedia dan bagaimana distribusi genre film dapat mempengaruhi preferensi pengguna.
+3. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film.
+4. Statistik Deskriptif: Selain visualisasi, perhitungan statistik deskriptif seperti mean, median, modus, dan rentang juga dilakukan untuk memberikan ringkasan numerik dari variabel yang ada. Ini akan memberikan gambaran tentang pusat, penyebaran, dan bentuk distribusi data.
+
+Melalui tahapan Univariate EDA ini, kita dapat memperoleh pemahaman yang lebih baik tentang dataset, karakteristik variabel, dan pola yang mungkin ada. Pemahaman ini penting untuk merancang dan mengembangkan sistem rekomendasi yang lebih efektif berdasarkan preferensi pengguna dan karakteristik film.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+Data preparation ini meliputi
+#### 1. Penggabungan Data: 
+Setelah memuat kedua DataFrame, langkah berikutnya adalah menggabungkan informasi pengguna dengan rating mereka. Penggabungan dilakukan menggunakan metode merge() pada Pandas, dengan user_id sebagai kunci penggabungan. Ini memungkinkan kita untuk memiliki satu DataFrame yang berisi semua informasi yang relevan, termasuk rating, usia, dan pekerjaan pengguna.
+#### 2. Pemeriksaan Missing Values:
+Memeriksa apakah terdapat missing values dalam dataset. Dengan menggunakan fungsi isnull() dan sum(), kita dapat menghitung jumlah missing values untuk setiap kolom dalam DataFrame. Setelah mengetahui kolom mana yang memiliki missing values, langkah selanjutnya adalah menganalisis dampak dari missing values tersebut. 
+#### 3. Penghapusan Kolom yang tidak relevan
+Dari analisis yang dilakukan, ditemukan kolom video_release_date, IMDb URL, dan unknown yang tidak memberikan kontribusi signifikan terhadap model rekomendasi. Kolom-kolom ini dapat menyebabkan kebingungan dan tidak memberikan informasi tambahan yang berguna. Kolom-kolom yang tidak relevan akan dihapus dari DataFrame menggunakan metode drop(). Ini membantu menjaga dataset tetap bersih dan fokus pada fitur yang lebih penting bagi analisis dan model rekomendasi. Pembersihan data membantu meningkatkan kualitas dataset dengan menghapus atau menangani missing values, sehingga analisis yang dilakukan menjadi lebih akurat. Data yang bersih dan lengkap mengurangi kemungkinan adanya bias atau kesalahan dalam model yang dibangun.
+#### 4. Mengurutkan berdasarkan user_id
+Setelah melakukan pembersihan dan penghapusan kolom yang tidak relevan, langkah berikutnya adalah mengurutkan film berdasarkan user_id. Ini penting untuk mempersiapkan data sebelum dimasukkan ke dalam model.
+#### 5. Menghapus data duplikat
+Selanjutnya, kita hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, kita perlu menghapus data yang duplikat dengan fungsi drop_duplicates(). Dalam hal ini, kita membuang data duplikat pada kolom ‘user_id’ dan 'title'. Dengan langkah ini, film akan terurut berdasarkan user_id, dan data siap untuk diproses lebih lanjut dalam sistem rekomendasi.
+#### 6. Konversi Data Series ke List
+Setelah mengurutkan film dan memasukkannya ke dalam variabel film, kita perlu melakukan konversi data dari series menjadi list. Hal ini berguna untuk mempermudah pengolahan data dalam model rekomendasi.
+#### 7. Membuat dictionary
+Setelah kita memiliki list untuk user_id, item_id, title, dan genre, langkah selanjutnya adalah membuat dictionary. Dictionary ini akan membantu kita dalam menyimpan informasi terkait pengguna dan film dengan cara yang lebih terstruktur. Dengan mengurutkan data dan membuat dictionary, struktur data menjadi lebih jelas dan terorganisir. Hal ini memudahkan dalam mengakses dan memanipulasi data, sehingga proses pengembangan model rekomendasi menjadi lebih efisien.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+Tahapan data preparation memastikan bahwa dataset siap untuk dimasukkan ke dalam model rekomendasi. Ini mencakup pembuatan format data yang diperlukan untuk algoritma yang akan digunakan, seperti dalam pendekatan content-based filtering yang memanfaatkan fitur-fitur dari film. Dengan melalui tahapan data preparation ini, kami dapat memastikan bahwa sistem rekomendasi yang dibangun lebih efektif dan mampu memberikan rekomendasi yang relevan kepada pengguna berdasarkan preferensi mereka.
 
 ## Modeling
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
