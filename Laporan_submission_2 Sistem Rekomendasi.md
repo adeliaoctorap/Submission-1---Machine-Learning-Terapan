@@ -41,9 +41,9 @@ Dataset yang digunakan dalam proyek ini adalah MovieLens 100k, yang merupakan sa
 
 ### Variabel-variabel pada MovieLens 100k dataset adalah sebagai berikut:
 Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan dalam sistem rekomendasi yang dibangun, antara lain:
-u.data: File ini berisi informasi penilaian dengan kolom user_id, movie_id, rating, dan timestamp.
-u.item: File ini berisi informasi tentang film dengan kolom movie_id, title, dan genres.
-u.user: File ini berisi informasi tentang penguna dengan kolom user_id, age, gender, occupation, dan zip_code 
+1. u.data: File ini berisi informasi penilaian dengan kolom user_id, movie_id, rating, dan timestamp.
+2. u.item: File ini berisi informasi tentang film dengan kolom movie_id, title, dan genres.
+3. u.user: File ini berisi informasi tentang penguna dengan kolom user_id, age, gender, occupation, dan zip_code 
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 Dalam upaya memahami dataset MovieLens 100k, langkah yang diambil adalah melakukan Univariate Exploratory Data Analysis (EDA). Univariate EDA berfokus pada analisis satu variabel pada satu waktu untuk mendapatkan wawasan yang lebih dalam tentang distribusi dan karakteristik data. Beberapa tahapan yang dilakukan dalam analisis ini meliputi:
