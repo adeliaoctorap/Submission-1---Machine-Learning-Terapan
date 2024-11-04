@@ -76,19 +76,72 @@ Tahapan data preparation memastikan bahwa dataset siap untuk dimasukkan ke dalam
 ## Modeling
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+### Model Development dengan Content Based Filtering
+#### 1. Representasi Fitur dengan TF-IDF
+TF-IDF (Term Frequency-Inverse Document Frequency) ini digunakan untuk memberikan bobot pada setiap kata dalam genre film. TF-IDF membantu dalam menyoroti kata yang unik dalam genre tiap film, sehingga membuat representasi fitur dari setiap film dalam bentuk vektor. Implementasinya dengan cara menghitung nilai TF-IDF untuk setiap kata yang muncul dalam genre dari film. Setiap film akan direpresentasikan sebagai vektor dalam ruang fitur berbasis kata, dengan bobot TF-IDF yang menggambarkan kepentingan relatif kata tersebut.
+Kelebihan:
+- Sederhana dan Efisien: Mudah untuk diimplementasikan dan tidak memerlukan banyak pengaturan. Menghasilkan representasi vektor yang mudah dipahami.
+- Mengurangi Noise: Memberikan bobot lebih pada kata yang penting dalam konteks tertentu dan mengurangi pengaruh kata-kata umum.
+- Tidak Memerlukan Data Latihan: Dapat diterapkan langsung pada data teks tanpa perlu pelatihan model.
+Kekurangan:
+- Kehilangan Makna Konteks: Tidak mempertimbangkan hubungan semantik antar kata (misalnya, sinonim).
+- Dimensi Tinggi: Representasi vektor bisa sangat besar, yang dapat menyebabkan masalah dalam komputasi dan penyimpanan.
+- Statistik Murni: Bergantung pada frekuensi kata, sehingga tidak selalu mencerminkan relevansi konten.
+
+#### 2. Perhitungan Similarity dengan Cosine Similarity
+Setelah mendapatkan vektor TF-IDF untuk setiap film, cosine similarity digunakan untuk mengukur kemiripan antara vektor film yang berbeda. Rumus Cosine Similarity: cosine_similarity(A,B) = ∥A∥∥B∥/A⋅B
+​di mana 𝐴 dan 𝐵 adalah vektor TF-IDF dari dua film yang dibandingkan. Cosine similarity memberikan nilai antara -1 hingga 1, di mana nilai yang lebih tinggi menunjukkan bahwa dua film memiliki tingkat kemiripan konten yang tinggi.
+Kelebihan:
+- Independen Terhadap Panjang Vektor: Memungkinkan perbandingan antara dokumen dengan panjang yang berbeda.
+- Interpretasi yang Jelas: Memberikan nilai yang mudah dipahami antara 0 (tidak mirip) dan 1 (sangat mirip).
+Kekurangan:
+- Tidak Mempertimbangkan Urutan Kata: Mengabaikan urutan kata dalam teks, yang bisa kehilangan konteks makna.
+- Sensitif terhadap Dimensi: Meskipun tidak terpengaruh oleh panjang vektor, bisa terpengaruh oleh distribusi fitur.
+
+#### 3. Rekomendasi Berdasarkan Similarity
+Berdasarkan skor cosine similarity, rekomendasi film akan diberikan. Film yang memiliki cosine similarity tertinggi dengan film yang sedang ditonton atau disukai pengguna akan direkomendasikan. Pada sistem rekomendasi ini, evaluasi menggunakan metrik seperti Precision@K, Recall@K, dan MAP (Mean Average Precision) untuk menilai performa sistem dalam memberikan rekomendasi yang relevan bagi pengguna.
+
+#### 4. Proses Improvement Model dengan Hyperparameter Tuning
+Meskipun TF-IDF dan cosine similarity adalah teknik yang cukup sederhana, kita bisa meningkatkan hasil model dengan melakukan tuning pada beberapa parameter dalam tahap preprocessing dan penghitungan. 
+Pengaturan Parameter dalam TF-IDF:
+- max_features: Membatasi jumlah fitur yang digunakan untuk representasi TF-IDF agar hanya kata-kata yang paling relevan yang diambil.
+- ngram_range: Mengubah rentang n-gram (misalnya, menggunakan bigrams) untuk menangkap informasi konteks yang lebih baik.
+- sublinear_tf: Menggunakan penilaian sublinear untuk mengurangi bobot frekuensi kata yang sangat tinggi.
+Proses Tuning:
+- Menggunakan teknik Grid Search atau Random Search untuk mencoba kombinasi parameter yang berbeda.
+- Menggunakan cross-validation untuk menilai performa dari kombinasi parameter yang berbeda.
+- Memilih parameter yang menghasilkan nilai evaluasi terbaik (misalnya, Precision, Recall).
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+### Metrik Evaluasi yang Digunakan
+#### 1. Precision@K 
+Precision@K mengukur proporsi rekomendasi yang relevan dari total K rekomendasi yang diberikan. Ini memberikan informasi tentang seberapa banyak rekomendasi yang dihasilkan sistem yang sesuai dengan preferensi pengguna.
+Rumusnya:
+Precision@K = Jumlah Rekomendasi Relevan 𝐾 / Jumlah Rekomendasi Relevan
+​#### 2. Recall@K
+Recall@K mengukur seberapa banyak item relevan yang berhasil direkomendasikan dari total item relevan yang tersedia. Ini memberikan gambaran tentang kemampuan sistem untuk menangkap semua item relevan.
+Rumusnya: Recall@K = Jumlah Rekomendasi Relevan / Total Item Relevan
+#### 3. Mean Average Precision (MAP):
+MAP adalah rata-rata dari precision pada setiap titik di mana sebuah item relevan ditemukan. Ini memberikan gambaran yang lebih baik tentang kualitas model dalam memberikan rekomendasi.
+Rumusnya: MAP = 1/∣𝑄∣ ∑ 𝑞∈𝑄 AP(𝑞)
+di mana 
+𝐴𝑃(𝑞) adalah average precision untuk kueri q.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+### Analisis Hasil:
+Pada sistem rekomendasi coba dimasukkan film Blue Chips (1994) untuk dicari film yang direkomendasikan oleh sistem. Hasil film dari rekomendasi sistem setelah menonton film Blue Chips (1994) yang bergenre Drama, sistem merekomendasikan film Blue Sky (1994) yang bergenre Drama. Lalu jika digunakan metrik evaluasinya menghasilkan 
+- Precision@5: 0.2
+- Recall@5: 1.0
+- Mean Average Precision (MAP): 5.0
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+#### Precision@5 (0.2):
+Nilai precision sebesar 0.2 berarti bahwa dari 5 rekomendasi yang diberikan, hanya 20% di antaranya yang relevan. Ini menunjukkan bahwa meskipun sistem dapat memberikan sejumlah rekomendasi, hanya sedikit yang sesuai dengan preferensi pengguna. Ini menandakan bahwa ada banyak rekomendasi yang tidak tepat, dan hal ini perlu diperbaiki untuk meningkatkan kualitas sistem.
+#### Recall@5 (1.0):
+Hasil recall sebesar 1.0 menunjukkan bahwa semua item relevan yang seharusnya direkomendasikan berhasil ditangkap oleh sistem. Artinya, sistem sangat efektif dalam menemukan dan merekomendasikan semua item relevan dari data yang tersedia. Namun, recall yang tinggi ini datang dengan trade-off pada precision yang rendah.
+#### Mean Average Precision (MAP 5.0):
+MAP biasanya dinyatakan dalam rentang 0 hingga 1, sehingga nilai 5.0 tampaknya tidak konsisten dengan konvensi MAP. Jika ini adalah kesalahan pengetikan, maka seharusnya berada dalam rentang tersebut. Nilai MAP yang tinggi menunjukkan bahwa ketika sistem berhasil memberikan rekomendasi yang relevan, kualitas rekomendasi tersebut cukup baik. Namun, jika nilai ini benar-benar 5.0, ini perlu ditelusuri lebih lanjut, karena bisa jadi mencerminkan kesalahan dalam perhitungan atau pemahaman metrik.
+### Kesimpulan
+Dari analisis metrik evaluasi di atas, sistem rekomendasi menunjukkan hasil yang mencolok. Meski recall sangat baik, sistem gagal dalam memberikan rekomendasi yang relevan secara tepat, terlihat dari rendahnya precision. Hal ini menunjukkan bahwa sistem mampu menemukan semua item relevan yang ada, tetapi juga merekomendasikan banyak item yang tidak sesuai dengan preferensi pengguna.
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
