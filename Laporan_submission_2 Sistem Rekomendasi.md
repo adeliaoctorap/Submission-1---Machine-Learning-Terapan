@@ -143,12 +143,5 @@ MAP biasanya dinyatakan dalam rentang 0 hingga 1, sehingga nilai 5.0 tampaknya t
 Dari analisis metrik evaluasi di atas, sistem rekomendasi menunjukkan hasil yang mencolok. Meski recall sangat baik, sistem gagal dalam memberikan rekomendasi yang relevan secara tepat, terlihat dari rendahnya precision. Hal ini menunjukkan bahwa sistem mampu menemukan semua item relevan yang ada, tetapi juga merekomendasikan banyak item yang tidak sesuai dengan preferensi pengguna.
 
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
-
 **---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
 
