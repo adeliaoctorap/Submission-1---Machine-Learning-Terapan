@@ -46,6 +46,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
    | 1 |  item_id   |   100000 non-null|  int64 |
    | 2 |  rating    |   100000 non-null|  int64 |
    | 3 |  timestamp |  100000 non-null |  int64 |
+
    Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
     - Banyak data pengguna:  943
     - Banyak data film:  1682
@@ -57,7 +58,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
     - rating: Penilaian atau rating yang diberikan oleh pengguna untuk film tertentu, biasanya dalam rentang 1 hingga 5. Rating ini menunjukkan preferensi atau penilaian pengguna terhadap film tersebut.
     - timestamp: Waktu (dalam bentuk UNIX timestamp) saat rating tersebut diberikan. Ini memungkinkan analisis waktu, seperti tren penilaian atau perubahan preferensi pengguna dari waktu ke waktu.
 
-2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
+3. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
    |   |  Column    |  Non-Null Count | Dtype| 
    |---|------------|-----------------|------|
    | 0 |  user_id   |  943 non-null   |int64 |
@@ -65,6 +66,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
    | 2 |  gender    |  943 non-null   |object|
    | 3 |  occupation|  943 non-null   |object|
    | 4 |  zip_code  |  943 non-null   |object|
+   
    Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
     - Banyak data pengguna:  943
     - Banyak data usia:  61
@@ -80,7 +82,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
      - occupation : Pekerjaan pengguna. Ini dapat digunakan untuk analisis preferensi berdasarkan pekerjaan atau profesi.
      - zip_code : Kode pos pengguna. Data lokasi dapat memberikan informasi tentang preferensi film berdasarkan wilayah atau area geografis.
        
-3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
+5. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
 |   |  Column            | Non-Null Count|  Dtype   |
 |---|--------------------|---------------|----------|  
 | 0 |  item_id           |  1682 non-null|   int64  | 
@@ -107,6 +109,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
 | 21|  Thriller          |  1682 non-null|   int64  |
 | 22|  War               |  1682 non-null|   int64  |
 | 23|  Western           |  1682 non-null|   int64  |
+
 Dari sekian banyak kolom di atas, terdapat missing value pada kolom release_date, video_release_date dan IMDb URL.  
 Adapun penjelasan fitur dari variabel di atas
 - item_id: ID unik untuk setiap film dalam dataset. Kolom ini berguna untuk mengidentifikasi setiap film, memungkinkan analisis atau pencocokan antar-tabel jika dataset terdiri dari lebih dari satu tabel.
