@@ -40,7 +40,7 @@ Dataset yang digunakan dalam proyek ini adalah MovieLens 100k, yang merupakan sa
 ### Variabel-variabel pada MovieLens 100k dataset adalah sebagai berikut:
 Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan dalam sistem rekomendasi yang dibangun, antara lain:
 1. u.data: File ini berisi informasi penilaian dengan 4 kolom, yaitu user_id, movie_id, rating, dan timestamp dan memiliki 10000 baris non-null. Dengan rincian sebagai berikut:
-    #   Column     Non-Null Count   Dtype
+        Column     Non-Null Count   Dtype
    ---  ------     --------------   -----
     0   user_id    100000 non-null  int64
     1   item_id    100000 non-null  int64
@@ -52,7 +52,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
     - Banyak data rating:  5
     - Banyak data waktu:  49282
 2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
-    #   Column      Non-Null Count  Dtype 
+        Column      Non-Null Count  Dtype 
    ---  ------      --------------  ----- 
     0   user_id     943 non-null    int64 
     1   age         943 non-null    int64 
@@ -68,7 +68,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
  'homemaker' 'artist' 'engineer' 'marketing' 'none' 'healthcare' 'retired'
  'salesman' 'doctor']
 3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
- #   Column              Non-Null Count  Dtype  
+     Column              Non-Null Count  Dtype  
 ---  ------              --------------  -----  
  0   item_id             1682 non-null   int64  
  1   title               1682 non-null   object 
@@ -142,7 +142,14 @@ Kekurangan:
 - Sensitif terhadap Dimensi: Meskipun tidak terpengaruh oleh panjang vektor, bisa terpengaruh oleh distribusi fitur.
 
 #### 2. Rekomendasi Berdasarkan Similarity
-Berdasarkan skor cosine similarity, rekomendasi film akan diberikan. Film yang memiliki cosine similarity tertinggi dengan film yang sedang ditonton atau disukai pengguna akan direkomendasikan. Pada sistem rekomendasi ini, evaluasi menggunakan metrik seperti Precision@K, Recall@K, dan MAP (Mean Average Precision) untuk menilai performa sistem dalam memberikan rekomendasi yang relevan bagi pengguna.
+Berdasarkan skor cosine similarity, rekomendasi film akan diberikan. Film yang memiliki cosine similarity tertinggi dengan film yang sedang ditonton atau disukai pengguna akan direkomendasikan. Pada sistem rekomendasi ini, evaluasi menggunakan metrik seperti Precision@K, Recall@K, dan MAP (Mean Average Precision) untuk menilai performa sistem dalam memberikan rekomendasi yang relevan bagi pengguna. 
+Rekomendasi film yang mirip dengan 'Ridicule (1996)':
+|  |                                     title |
+|--|-------------------------------------------|
+|0 | Scream of Stone (Schrei aus Stein) (1991) |
+|1 |                       One Fine Day (1996) |
+
+Hasil rekomendasi yang diberikan oleh model menunjukkan film-film yang dianggap memiliki kemiripan dengan Ridicule (1996) berdasarkan pendekatan content-based filtering. Dengan interpretasi Scream of Stone (Schrei aus Stein) (1991) dan One Fine Day (1996) dipilih oleh model karena memiliki kemiripan fitur dengan Ridicule (1996), dalam aspek genre film.
 
 #### 3. Proses Improvement Model dengan Hyperparameter Tuning
 Meskipun TF-IDF dan cosine similarity adalah teknik yang cukup sederhana, kita bisa meningkatkan hasil model dengan melakukan tuning pada beberapa parameter dalam tahap preprocessing dan penghitungan. 
@@ -154,16 +161,6 @@ Proses Tuning:
 - Menggunakan teknik Grid Search atau Random Search untuk mencoba kombinasi parameter yang berbeda.
 - Menggunakan cross-validation untuk menilai performa dari kombinasi parameter yang berbeda.
 - Memilih parameter yang menghasilkan nilai evaluasi terbaik (misalnya, Precision, Recall).
-
-#### 4. Hasil Rekomendasi Model yang Diterapkan
-
-Rekomendasi film yang mirip dengan 'Ridicule (1996)':
-|  |                                     title |
-|--|-------------------------------------------|
-|0 | Scream of Stone (Schrei aus Stein) (1991) |
-|1 |                       One Fine Day (1996) |
-
-Hasil rekomendasi yang diberikan oleh model menunjukkan film-film yang dianggap memiliki kemiripan dengan Ridicule (1996) berdasarkan pendekatan content-based filtering. Dengan interpretasi Scream of Stone (Schrei aus Stein) (1991) dan One Fine Day (1996) dipilih oleh model karena memiliki kemiripan fitur dengan Ridicule (1996), dalam aspek genre film.
 
 ## Evaluation
 ### Metrik Evaluasi yang Digunakan
