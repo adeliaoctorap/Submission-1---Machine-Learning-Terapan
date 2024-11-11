@@ -40,12 +40,12 @@ Dataset yang digunakan dalam proyek ini adalah MovieLens 100k, yang merupakan sa
 ### Variabel-variabel pada MovieLens 100k dataset adalah sebagai berikut:
 Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan dalam sistem rekomendasi yang dibangun, antara lain:
 1. u.data: File ini berisi informasi penilaian dengan 4 kolom, yaitu user_id, movie_id, rating, dan timestamp dan memiliki 10000 baris non-null. Dengan rincian sebagai berikut:
-        Column     Non-Null Count   Dtype
-   ---  ------     --------------   -----
-    0   user_id    100000 non-null  int64
-    1   item_id    100000 non-null  int64
-    2   rating     100000 non-null  int64
-    3   timestamp  100000 non-null  int64
+   |   |  Column    |   Non-Null Count |  Dtype |
+   |---|------------|------------------|--------|
+   | 0 |  user_id   |   100000 non-null|  int64 |
+   | 1 |  item_id   |   100000 non-null|  int64 |
+   | 2 |  rating    |   100000 non-null|  int64 |
+   | 3 |  timestamp |  100000 non-null |  int64 |
    Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
     - Banyak data pengguna:  943
     - Banyak data film:  1682
@@ -58,13 +58,13 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
     - timestamp: Waktu (dalam bentuk UNIX timestamp) saat rating tersebut diberikan. Ini memungkinkan analisis waktu, seperti tren penilaian atau perubahan preferensi pengguna dari waktu ke waktu.
 
 2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
-        Column      Non-Null Count  Dtype 
-   ---  ------      --------------  ----- 
-    0   user_id     943 non-null    int64 
-    1   age         943 non-null    int64 
-    2   gender      943 non-null    object
-    3   occupation  943 non-null    object
-    4   zip_code    943 non-null    object
+   |   |  Column    |  Non-Null Count | Dtype| 
+   |---|------------|-----------------|------|
+   | 0 |  user_id   |  943 non-null   |int64 |
+   | 1 |  age       |  943 non-null   |int64 |
+   | 2 |  gender    |  943 non-null   |object|
+   | 3 |  occupation|  943 non-null   |object|
+   | 4 |  zip_code  |  943 non-null   |object|
    Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
     - Banyak data pengguna:  943
     - Banyak data usia:  61
@@ -81,32 +81,32 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
      - zip_code : Kode pos pengguna. Data lokasi dapat memberikan informasi tentang preferensi film berdasarkan wilayah atau area geografis.
        
 3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
-     Column              Non-Null Count  Dtype  
----  ------              --------------  -----  
- 0   item_id             1682 non-null   int64  
- 1   title               1682 non-null   object 
- 2   release_date        1681 non-null   object 
- 3   video_release_date  0 non-null      float64
- 4   IMDb URL            1679 non-null   object 
- 5   unknown             1682 non-null   int64  
- 6   Action              1682 non-null   int64  
- 7   Adventure           1682 non-null   int64  
- 8   Animation           1682 non-null   int64  
- 9   Children’s          1682 non-null   int64  
- 10  Comedy              1682 non-null   int64  
- 11  Crime               1682 non-null   int64  
- 12  Documentary         1682 non-null   int64  
- 13  Drama               1682 non-null   int64  
- 14  Fantasy             1682 non-null   int64  
- 15  Film-Noir           1682 non-null   int64  
- 16  Horror              1682 non-null   int64  
- 17  Musical             1682 non-null   int64  
- 18  Mystery             1682 non-null   int64  
- 19  Romance             1682 non-null   int64  
- 20  Sci-Fi              1682 non-null   int64  
- 21  Thriller            1682 non-null   int64  
- 22  War                 1682 non-null   int64  
- 23  Western             1682 non-null   int64  
+|   |  Column            | Non-Null Count|  Dtype   |
+|---|--------------------|---------------|----------|  
+| 0 |  item_id           |  1682 non-null|   int64  | 
+| 1 |  title             |  1682 non-null|   object | 
+| 2 |  release_date      |  1681 non-null|   object | 
+| 3 |  video_release_date|  0 non-null   |   float64|
+| 4 |  IMDb URL          |  1679 non-null|   object |
+| 5 |  unknown           |  1682 non-null|   int64  |
+| 6 |  Action            |  1682 non-null|   int64  |
+| 7 |  Adventure         |  1682 non-null|   int64  |
+| 8 |  Animation         |  1682 non-null|   int64  |
+| 9 |  Children’s        |  1682 non-null|   int64  |
+| 10|  Comedy            |  1682 non-null|   int64  |
+| 11|  Crime             |  1682 non-null|   int64  |
+| 12|  Documentary       |  1682 non-null|   int64  |
+| 13|  Drama             |  1682 non-null|   int64  |
+| 14|  Fantasy           |  1682 non-null|   int64  |
+| 15|  Film-Noir         |  1682 non-null|   int64  |
+| 16|  Horror            |  1682 non-null|   int64  |
+| 17|  Musical           |  1682 non-null|   int64  |
+| 18|  Mystery           |  1682 non-null|   int64  |
+| 19|  Romance           |  1682 non-null|   int64  |
+| 20|  Sci-Fi            |  1682 non-null|   int64  |
+| 21|  Thriller          |  1682 non-null|   int64  |
+| 22|  War               |  1682 non-null|   int64  |
+| 23|  Western           |  1682 non-null|   int64  |
 Dari sekian banyak kolom di atas, terdapat missing value pada kolom release_date, video_release_date dan IMDb URL.  
 Adapun penjelasan fitur dari variabel di atas
 - item_id: ID unik untuk setiap film dalam dataset. Kolom ini berguna untuk mengidentifikasi setiap film, memungkinkan analisis atau pencocokan antar-tabel jika dataset terdiri dari lebih dari satu tabel.
@@ -131,18 +131,18 @@ Melalui tahapan Univariate EDA ini, kita dapat memperoleh pemahaman yang lebih b
 Data preparation ini meliputi
 #### 1. Penggabungan Data: 
 Setelah memuat kedua DataFrame, langkah berikutnya adalah menggabungkan informasi pengguna dengan rating mereka. Penggabungan dilakukan menggunakan metode merge() pada Pandas, dengan user_id sebagai kunci penggabungan. Ini memungkinkan kita untuk memiliki satu DataFrame yang berisi semua informasi yang relevan, termasuk rating, usia, dan pekerjaan pengguna.
-#### 2. Pemeriksaan Missing Values:
-Memeriksa apakah terdapat missing values dalam dataset. Dengan menggunakan fungsi isnull() dan sum(), kita dapat menghitung jumlah missing values untuk setiap kolom dalam DataFrame. Setelah mengetahui kolom mana yang memiliki missing values, langkah selanjutnya adalah menganalisis dampak dari missing values tersebut. 
-#### 3. Penghapusan Kolom yang tidak relevan
+#### 2. Penghapusan Kolom yang tidak relevan
 Dari analisis yang dilakukan, ditemukan kolom video_release_date, IMDb URL, dan unknown yang tidak memberikan kontribusi signifikan terhadap model rekomendasi. Kolom-kolom ini dapat menyebabkan kebingungan dan tidak memberikan informasi tambahan yang berguna. Kolom-kolom yang tidak relevan akan dihapus dari DataFrame menggunakan metode drop(). Ini membantu menjaga dataset tetap bersih dan fokus pada fitur yang lebih penting bagi analisis dan model rekomendasi. Pembersihan data membantu meningkatkan kualitas dataset dengan menghapus atau menangani missing values, sehingga analisis yang dilakukan menjadi lebih akurat. Data yang bersih dan lengkap mengurangi kemungkinan adanya bias atau kesalahan dalam model yang dibangun.
-#### 4. Mengurutkan berdasarkan user_id
+#### 3. Mengurutkan berdasarkan user_id
 Setelah melakukan pembersihan dan penghapusan kolom yang tidak relevan, langkah berikutnya adalah mengurutkan film berdasarkan user_id. Ini penting untuk mempersiapkan data sebelum dimasukkan ke dalam model.
-#### 5. Menghapus data duplikat
+#### 4. Menghapus data duplikat
 Selanjutnya, kita hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, kita perlu menghapus data yang duplikat dengan fungsi drop_duplicates(). Dalam hal ini, kita membuang data duplikat pada kolom ‘user_id’ dan 'title'. Dengan langkah ini, film akan terurut berdasarkan user_id, dan data siap untuk diproses lebih lanjut dalam sistem rekomendasi.
-#### 6. Konversi Data Series ke List
+#### 5. Konversi Data Series ke List
 Setelah mengurutkan film dan memasukkannya ke dalam variabel film, kita perlu melakukan konversi data dari series menjadi list. Hal ini berguna untuk mempermudah pengolahan data dalam model rekomendasi.
-#### 7. Membuat dictionary
+#### 6. Membuat dictionary
 Setelah kita memiliki list untuk user_id, item_id, title, dan genre, langkah selanjutnya adalah membuat dictionary. Dictionary ini akan membantu kita dalam menyimpan informasi terkait pengguna dan film dengan cara yang lebih terstruktur. Dengan mengurutkan data dan membuat dictionary, struktur data menjadi lebih jelas dan terorganisir. Hal ini memudahkan dalam mengakses dan memanipulasi data, sehingga proses pengembangan model rekomendasi menjadi lebih efisien.
+#### 7. Menghapus duplikat untuk memastikan hanya satu entri per film
+Untuk menghapus duplikat dalam dataset untuk memastikan hanya satu entri per film, dapat menggunakan metode drop_duplicates() dalam Python dengan pandas untuk kolom item_id yang mungkin berisi entri duplikat.
 #### 8. Representasi Fitur dengan TF-IDF
 TF-IDF (Term Frequency-Inverse Document Frequency) ini digunakan untuk memberikan bobot pada setiap kata dalam genre film. TF-IDF membantu dalam menyoroti kata yang unik dalam genre tiap film, sehingga membuat representasi fitur dari setiap film dalam bentuk vektor. Implementasinya dengan cara menghitung nilai TF-IDF untuk setiap kata yang muncul dalam genre dari film. Setiap film akan direpresentasikan sebagai vektor dalam ruang fitur berbasis kata, dengan bobot TF-IDF yang menggambarkan kepentingan relatif kata tersebut.
 
@@ -201,29 +201,23 @@ di mana
 𝐴𝑃(𝑞) adalah average precision untuk kueri q.
 
 ### Analisis Hasil:
-Pada sistem rekomendasi coba dimasukkan film Blue Chips (1994) untuk dicari film yang direkomendasikan oleh sistem. Hasil film dari rekomendasi sistem setelah menonton film Blue Chips (1994) yang bergenre Drama, sistem merekomendasikan film Blue Sky (1994) yang bergenre Drama. Lalu jika digunakan metrik evaluasinya menghasilkan 
-- Precision@5: 0.2
-- Recall@5: 1.0
-- Mean Average Precision (MAP): 5.0
+Pada sistem rekomendasi coba dimasukkan film Ridicule (1996) untuk dicari film yang direkomendasikan oleh sistem. Hasil film dari rekomendasi sistem setelah menonton film Ridicule (1996), sistem merekomendasikan film Scream of Stone (Schrei aus Stein) (1991) dan One Fine Day (1996). Lalu jika digunakan metrik evaluasinya menghasilkan berikut 
+Hasil Evaluasi untuk rekomendasi film 'Ridicule (1996)':
+Precision@5: 0.4000
+Recall@5: 1.0000
+Mean Average Precision (MAP): 1.0000
 
-#### Precision@5 (0.2):
-Nilai precision sebesar 0.2 berarti bahwa dari 5 rekomendasi yang diberikan, hanya 20% di antaranya yang relevan. Ini menunjukkan bahwa meskipun sistem dapat memberikan sejumlah rekomendasi, hanya sedikit yang sesuai dengan preferensi pengguna. Ini menandakan bahwa ada banyak rekomendasi yang tidak tepat, dan hal ini perlu diperbaiki untuk meningkatkan kualitas sistem.
+#### Precision@5 (0.4):
+Precision@5: 0.4000: Artinya, dari 5 rekomendasi teratas yang diberikan, 40% di antaranya (2 film dari 5) adalah film yang relevan atau sesuai dengan data uji. Ini menunjukkan bahwa sebagian besar rekomendasi yang diberikan model cukup relevan.
 #### Recall@5 (1.0):
-Hasil recall sebesar 1.0 menunjukkan bahwa semua item relevan yang seharusnya direkomendasikan berhasil ditangkap oleh sistem. Artinya, sistem sangat efektif dalam menemukan dan merekomendasikan semua item relevan dari data yang tersedia. Namun, recall yang tinggi ini datang dengan trade-off pada precision yang rendah.
-#### Mean Average Precision (MAP 5.0):
-MAP biasanya dinyatakan dalam rentang 0 hingga 1, sehingga nilai 5.0 tampaknya tidak konsisten dengan konvensi MAP. Jika ini adalah kesalahan pengetikan, maka seharusnya berada dalam rentang tersebut. Nilai MAP yang tinggi menunjukkan bahwa ketika sistem berhasil memberikan rekomendasi yang relevan, kualitas rekomendasi tersebut cukup baik. Namun, jika nilai ini benar-benar 5.0, ini perlu ditelusuri lebih lanjut, karena bisa jadi mencerminkan kesalahan dalam perhitungan atau pemahaman metrik.
+Recall@5: 1.0000: Recall mencapai 100%, yang berarti model berhasil menemukan semua film yang relevan dalam daftar rekomendasinya. Ini adalah hasil yang sangat baik karena menunjukkan bahwa model tidak melewatkan item relevan di antara 5 rekomendasi teratas.
+#### Mean Average Precision (MAP 1.0):
+Mean Average Precision (MAP): 1.0000: MAP dengan nilai 1.0 menunjukkan bahwa semua film yang relevan muncul dalam urutan yang ideal di antara rekomendasi. Ini berarti semua film relevan berada di posisi teratas, yang menandakan bahwa model memberikan rekomendasi yang sangat relevan dalam urutan yang optimal.
 
 ### Kesimpulan
-Dari problem statement yang diuraikan bahwa adanya keterbatasan dalam menemukan film yang sesuai dengan preferensi pengguna di tengah banyaknya pilihan dan kurangnya personalisasi rekomendasi yang mempertimbangkan preferensi unik setiap pengguna, solusi yang ditawarkan adalah membangun model content-Based filtering berbasis similarity menggunakan algoritma machine learning serta tidak lupa untuk menambahkan metode evaluasi. Maka hasil yang diharapkan adalah dapat meningkatnya kemampuan sistem rekomendasi dalam menyaring pilihan film sesuai minat pengguna dan menyediakan rekomendasi yang lebih personal dengan menyesuaikan fitur konten film berdasarkan preferensi pengguna. Dari tabel berikut:
-Rekomendasi film yang mirip dengan 'Ridicule (1996)':
-|  |                                     title |
-|--|-------------------------------------------|
-|0 | Scream of Stone (Schrei aus Stein) (1991) |
-|1 |                       One Fine Day (1996) |
-Menunjukkan adanya dua rekomendasi film dari objek film Ridicule (1996). Ini cukup untuk memberikan variasi rekomendasi kepada pengguna, sebagai saran untuk menonton film yang kurang lebih bergenre sama dengan film Ridicule (1996).
+Dari problem statement yang diuraikan bahwa adanya keterbatasan dalam menemukan film yang sesuai dengan preferensi pengguna di tengah banyaknya pilihan dan kurangnya personalisasi rekomendasi yang mempertimbangkan preferensi unik setiap pengguna, solusi yang ditawarkan adalah membangun model content-Based filtering berbasis similarity menggunakan algoritma machine learning serta tidak lupa untuk menambahkan metode evaluasi. Maka hasil yang diharapkan adalah dapat meningkatnya kemampuan sistem rekomendasi dalam menyaring pilihan film sesuai minat pengguna dan menyediakan rekomendasi yang lebih personal dengan menyesuaikan fitur konten film berdasarkan preferensi pengguna. Dari hasil menunjukkan adanya dua rekomendasi film dari objek film Ridicule (1996). Ini cukup untuk memberikan variasi rekomendasi kepada pengguna, sebagai saran untuk menonton film yang kurang lebih bergenre sama dengan film Ridicule (1996).
 
 Dari data-data yang telah dilampirkan di atas secara keseluruhan, model ini memiliki potensi untuk memberikan dampak positif bagi pemahaman bisnis yang terkait dengan kepuasan dan pengalaman pengguna. Jika hasil evaluasi model menunjukkan performa yang baik, dapat disimpulkan bahwa solusi yang diterapkan sudah efektif dalam menjawab masalah utama dan mencapai tujuan yang diharapkan.
 
 
-**---Ini adalah bagian akhir laporan---**
 
