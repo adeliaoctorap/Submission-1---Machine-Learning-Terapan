@@ -25,9 +25,7 @@ Setiap pengguna memiliki preferensi yang berbeda terhadap genre, gaya, dan jenis
 #### 1. Meningkatkan kemampuan sistem rekomendasi dalam menyaring pilihan film sesuai minat pengguna
 Untuk mengatasi "information overload" yang dirasakan pengguna, tujuan utamanya adalah menyediakan rekomendasi yang sesuai dengan selera pengguna, sehingga mereka tidak perlu mencari film secara manual. Dengan content-based filtering, sistem dapat merekomendasikan film berdasarkan fitur dari film yang disukai pengguna, seperti genre, sutradara, atau aktor. Sebagai contoh, jika seorang pengguna cenderung menyukai film ber-genre “Drama” dan “Romance,” sistem akan merekomendasikan film dengan genre yang serupa.
 #### 2. Menyediakan rekomendasi yang lebih personal dengan menyesuaikan fitur konten film berdasarkan preferensi pengguna
-Content-based filtering dapat membantu dengan cara menyesuaikan rekomendasi berdasarkan kesamaan konten antara film yang sudah ditonton dan yang akan direkomendasikan. Pendekatan ini memungkinkan sistem untuk membuat profil pengguna berdasarkan film yang disukai, lalu mencocokkannya dengan film-film yang memiliki karakteristik serupa. Dengan begitu, rekomendasi yang diberikan lebih spesifik dan relevan.
-#### 3. Mengoptimalkan efisiensi sistem rekomendasi dengan pendekatan berbasis konten yang dapat dikembangkan secara modular
-Pendekatan content-based filtering lebih efisien dalam hal pemrosesan data karena sistem hanya perlu mengandalkan fitur konten dari film dan profil pengguna. 
+Bagian ini berusaha menjawab problem statement 2 dengan pendekatan yang lebih personal, yaitu mencocokkan fitur konten film yang relevan dengan preferensi individu pengguna. Dengan content-based filtering, sistem dapat menangkap preferensi unik pengguna sehingga rekomendasi menjadi lebih relevan dan personal.
 
 ### Solution statements
 #### 1. Membangun Model Content-Based Filtering Berbasis Similarity (Cosine Similarity dan TF-IDF)
@@ -41,16 +39,72 @@ Dataset yang digunakan dalam proyek ini adalah MovieLens 100k, yang merupakan sa
 
 ### Variabel-variabel pada MovieLens 100k dataset adalah sebagai berikut:
 Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan dalam sistem rekomendasi yang dibangun, antara lain:
-1. u.data: File ini berisi informasi penilaian dengan kolom user_id, movie_id, rating, dan timestamp.
-2. u.item: File ini berisi informasi tentang film dengan kolom movie_id, title, dan genres.
-3. u.user: File ini berisi informasi tentang penguna dengan kolom user_id, age, gender, occupation, dan zip_code 
+1. u.data: File ini berisi informasi penilaian dengan 4 kolom, yaitu user_id, movie_id, rating, dan timestamp dan memiliki 10000 baris non-null. Dengan rincian sebagai berikut:
+    #   Column     Non-Null Count   Dtype
+   ---  ------     --------------   -----
+    0   user_id    100000 non-null  int64
+    1   item_id    100000 non-null  int64
+    2   rating     100000 non-null  int64
+    3   timestamp  100000 non-null  int64
+   Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
+    - Banyak data pengguna:  943
+    - Banyak data film:  1682
+    - Banyak data rating:  5
+    - Banyak data waktu:  49282
+2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
+    #   Column      Non-Null Count  Dtype 
+   ---  ------      --------------  ----- 
+    0   user_id     943 non-null    int64 
+    1   age         943 non-null    int64 
+    2   gender      943 non-null    object
+    3   occupation  943 non-null    object
+    4   zip_code    943 non-null    object
+   Tidak terdapat adanya missing value dan dengan data unik sebagai berikut:
+    - Banyak data pengguna:  943
+    - Banyak data usia:  61
+    - Jenis kelamin pengguna:  [M, F]
+    - Jenis pekerjaan pengguna:  ['technician' 'other' 'writer' 'executive' 'administrator' 'student'
+ 'lawyer' 'educator' 'scientist' 'entertainment' 'programmer' 'librarian'
+ 'homemaker' 'artist' 'engineer' 'marketing' 'none' 'healthcare' 'retired'
+ 'salesman' 'doctor']
+3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   item_id             1682 non-null   int64  
+ 1   title               1682 non-null   object 
+ 2   release_date        1681 non-null   object 
+ 3   video_release_date  0 non-null      float64
+ 4   IMDb URL            1679 non-null   object 
+ 5   unknown             1682 non-null   int64  
+ 6   Action              1682 non-null   int64  
+ 7   Adventure           1682 non-null   int64  
+ 8   Animation           1682 non-null   int64  
+ 9   Children’s          1682 non-null   int64  
+ 10  Comedy              1682 non-null   int64  
+ 11  Crime               1682 non-null   int64  
+ 12  Documentary         1682 non-null   int64  
+ 13  Drama               1682 non-null   int64  
+ 14  Fantasy             1682 non-null   int64  
+ 15  Film-Noir           1682 non-null   int64  
+ 16  Horror              1682 non-null   int64  
+ 17  Musical             1682 non-null   int64  
+ 18  Mystery             1682 non-null   int64  
+ 19  Romance             1682 non-null   int64  
+ 20  Sci-Fi              1682 non-null   int64  
+ 21  Thriller            1682 non-null   int64  
+ 22  War                 1682 non-null   int64  
+ 23  Western             1682 non-null   int64  
+   
+Dari sekian banyak kolom di atas, terdapat missing value pada kolom release_date, video_release_date dan IMDb URL.   
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
 Dalam upaya memahami dataset MovieLens 100k, langkah yang diambil adalah melakukan Univariate Exploratory Data Analysis (EDA). Univariate EDA berfokus pada analisis satu variabel pada satu waktu untuk mendapatkan wawasan yang lebih dalam tentang distribusi dan karakteristik data. Beberapa tahapan yang dilakukan dalam analisis ini meliputi:
-1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi.
-2. Visualisasi Genre Film: Dengan menggunakan diagram lingkaran atau grafik batang, kita dapat menganalisis proporsi berbagai genre film dalam dataset. Ini akan memberikan gambaran tentang genre mana yang paling banyak tersedia dan bagaimana distribusi genre film dapat mempengaruhi preferensi pengguna.
-3. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film.
-4. Statistik Deskriptif: Selain visualisasi, perhitungan statistik deskriptif seperti mean, median, modus, dan rentang juga dilakukan untuk memberikan ringkasan numerik dari variabel yang ada. Ini akan memberikan gambaran tentang pusat, penyebaran, dan bentuk distribusi data.
+1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi. Untuk lebih jelasnya dapat melihat histogram berikut ![image](https://github.com/user-attachments/assets/b64d1e9d-f9c5-4fac-9191-a2c0355304b2) Terlihat dari histogram tersebut, sebagian besar pengguna memberikan rating 4 dan rating 3
+2. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film. Ditunjukkan pada gambar berikut. ![image](https://github.com/user-attachments/assets/da169fa1-f57c-448e-b938-4d516db83eb2) Dari gambar tersebut dapat teramati untuk kelompok umur yang aktif adalah di pertengahan 20 hingga pertengahan 40.
+3. Visualisasi Genre Film: Dengan menggunakan diagram lingkaran atau grafik batang, kita dapat menganalisis proporsi berbagai genre film dalam dataset. Ini akan memberikan gambaran tentang genre mana yang paling banyak tersedia dan bagaimana distribusi genre film dapat mempengaruhi preferensi pengguna. ![image](https://github.com/user-attachments/assets/52b6d6aa-7267-4282-8413-6435e3975257) ![image](https://github.com/user-attachments/assets/6fd7219b-0540-4d21-948d-d6c43dc217c8)
+4. Statistik Deskriptif: Selain visualisasi, perhitungan statistik deskriptif seperti mean, median, modus, dan rentang juga dilakukan untuk memberikan ringkasan numerik dari variabel yang ada. Ini akan memberikan gambaran tentang pusat, penyebaran, dan bentuk distribusi data. Untuk data rating ditunjukkan sebagai berikut:
+- Mean Rating: 3.52986
+- Median Rating: 4.0
+- Mode Rating: 4
 
 Melalui tahapan Univariate EDA ini, kita dapat memperoleh pemahaman yang lebih baik tentang dataset, karakteristik variabel, dan pola yang mungkin ada. Pemahaman ini penting untuk merancang dan mengembangkan sistem rekomendasi yang lebih efektif berdasarkan preferensi pengguna dan karakteristik film.
 
@@ -77,18 +131,7 @@ Tahapan data preparation memastikan bahwa dataset siap untuk dimasukkan ke dalam
 Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
 
 ### Model Development dengan Content Based Filtering
-#### 1. Representasi Fitur dengan TF-IDF
-TF-IDF (Term Frequency-Inverse Document Frequency) ini digunakan untuk memberikan bobot pada setiap kata dalam genre film. TF-IDF membantu dalam menyoroti kata yang unik dalam genre tiap film, sehingga membuat representasi fitur dari setiap film dalam bentuk vektor. Implementasinya dengan cara menghitung nilai TF-IDF untuk setiap kata yang muncul dalam genre dari film. Setiap film akan direpresentasikan sebagai vektor dalam ruang fitur berbasis kata, dengan bobot TF-IDF yang menggambarkan kepentingan relatif kata tersebut.
-Kelebihan:
-- Sederhana dan Efisien: Mudah untuk diimplementasikan dan tidak memerlukan banyak pengaturan. Menghasilkan representasi vektor yang mudah dipahami.
-- Mengurangi Noise: Memberikan bobot lebih pada kata yang penting dalam konteks tertentu dan mengurangi pengaruh kata-kata umum.
-- Tidak Memerlukan Data Latihan: Dapat diterapkan langsung pada data teks tanpa perlu pelatihan model.
-Kekurangan:
-- Kehilangan Makna Konteks: Tidak mempertimbangkan hubungan semantik antar kata (misalnya, sinonim).
-- Dimensi Tinggi: Representasi vektor bisa sangat besar, yang dapat menyebabkan masalah dalam komputasi dan penyimpanan.
-- Statistik Murni: Bergantung pada frekuensi kata, sehingga tidak selalu mencerminkan relevansi konten.
-
-#### 2. Perhitungan Similarity dengan Cosine Similarity
+#### 1. Perhitungan Similarity dengan Cosine Similarity
 Setelah mendapatkan vektor TF-IDF untuk setiap film, cosine similarity digunakan untuk mengukur kemiripan antara vektor film yang berbeda. Rumus Cosine Similarity: cosine_similarity(A,B) = ∥A∥∥B∥/A⋅B
 ​di mana 𝐴 dan 𝐵 adalah vektor TF-IDF dari dua film yang dibandingkan. Cosine similarity memberikan nilai antara -1 hingga 1, di mana nilai yang lebih tinggi menunjukkan bahwa dua film memiliki tingkat kemiripan konten yang tinggi.
 Kelebihan:
@@ -98,10 +141,10 @@ Kekurangan:
 - Tidak Mempertimbangkan Urutan Kata: Mengabaikan urutan kata dalam teks, yang bisa kehilangan konteks makna.
 - Sensitif terhadap Dimensi: Meskipun tidak terpengaruh oleh panjang vektor, bisa terpengaruh oleh distribusi fitur.
 
-#### 3. Rekomendasi Berdasarkan Similarity
+#### 2. Rekomendasi Berdasarkan Similarity
 Berdasarkan skor cosine similarity, rekomendasi film akan diberikan. Film yang memiliki cosine similarity tertinggi dengan film yang sedang ditonton atau disukai pengguna akan direkomendasikan. Pada sistem rekomendasi ini, evaluasi menggunakan metrik seperti Precision@K, Recall@K, dan MAP (Mean Average Precision) untuk menilai performa sistem dalam memberikan rekomendasi yang relevan bagi pengguna.
 
-#### 4. Proses Improvement Model dengan Hyperparameter Tuning
+#### 3. Proses Improvement Model dengan Hyperparameter Tuning
 Meskipun TF-IDF dan cosine similarity adalah teknik yang cukup sederhana, kita bisa meningkatkan hasil model dengan melakukan tuning pada beberapa parameter dalam tahap preprocessing dan penghitungan. 
 Pengaturan Parameter dalam TF-IDF:
 - max_features: Membatasi jumlah fitur yang digunakan untuk representasi TF-IDF agar hanya kata-kata yang paling relevan yang diambil.
@@ -111,6 +154,16 @@ Proses Tuning:
 - Menggunakan teknik Grid Search atau Random Search untuk mencoba kombinasi parameter yang berbeda.
 - Menggunakan cross-validation untuk menilai performa dari kombinasi parameter yang berbeda.
 - Memilih parameter yang menghasilkan nilai evaluasi terbaik (misalnya, Precision, Recall).
+
+#### 4. Hasil Rekomendasi Model yang Diterapkan
+
+Rekomendasi film yang mirip dengan 'Ridicule (1996)':
+|  |                                     title |
+|--|-------------------------------------------|
+|0 | Scream of Stone (Schrei aus Stein) (1991) |
+|1 |                       One Fine Day (1996) |
+
+Hasil rekomendasi yang diberikan oleh model menunjukkan film-film yang dianggap memiliki kemiripan dengan Ridicule (1996) berdasarkan pendekatan content-based filtering. Dengan interpretasi Scream of Stone (Schrei aus Stein) (1991) dan One Fine Day (1996) dipilih oleh model karena memiliki kemiripan fitur dengan Ridicule (1996), dalam aspek genre film.
 
 ## Evaluation
 ### Metrik Evaluasi yang Digunakan
