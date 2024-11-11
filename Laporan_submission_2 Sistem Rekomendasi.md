@@ -51,6 +51,12 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
     - Banyak data film:  1682
     - Banyak data rating:  5
     - Banyak data waktu:  49282
+   Uraian fitur pada data:
+    - user_id: ID pengguna unik. Setiap pengguna memiliki ID yang berbeda, yang memungkinkan kita melacak riwayat penilaian atau preferensi dari masing-masing pengguna.
+    - item_id (atau movie_id): ID film unik. Setiap film memiliki ID yang unik yang membantu mengidentifikasi film tertentu dalam dataset.
+    - rating: Penilaian atau rating yang diberikan oleh pengguna untuk film tertentu, biasanya dalam rentang 1 hingga 5. Rating ini menunjukkan preferensi atau penilaian pengguna terhadap film tersebut.
+    - timestamp: Waktu (dalam bentuk UNIX timestamp) saat rating tersebut diberikan. Ini memungkinkan analisis waktu, seperti tren penilaian atau perubahan preferensi pengguna dari waktu ke waktu.
+
 2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
         Column      Non-Null Count  Dtype 
    ---  ------      --------------  ----- 
@@ -67,6 +73,13 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
  'lawyer' 'educator' 'scientist' 'entertainment' 'programmer' 'librarian'
  'homemaker' 'artist' 'engineer' 'marketing' 'none' 'healthcare' 'retired'
  'salesman' 'doctor']
+    Uraian fitur pada data:
+     - user_id: ID pengguna unik. Setiap pengguna memiliki ID yang berbeda, yang memungkinkan kita melacak riwayat penilaian atau preferensi dari masing-masing pengguna.
+     - age : Usia pengguna. Informasi ini digunakan untuk analisis demografis, misalnya, untuk melihat preferensi berdasarkan kelompok usia tertentu.
+     - gender: Menunjukkan jenis kelamin pengguna, pria atau wanita, Male atau Female.
+     - occupation : Pekerjaan pengguna. Ini dapat digunakan untuk analisis preferensi berdasarkan pekerjaan atau profesi.
+     - zip_code : Kode pos pengguna. Data lokasi dapat memberikan informasi tentang preferensi film berdasarkan wilayah atau area geografis.
+       
 3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
      Column              Non-Null Count  Dtype  
 ---  ------              --------------  -----  
@@ -94,9 +107,15 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
  21  Thriller            1682 non-null   int64  
  22  War                 1682 non-null   int64  
  23  Western             1682 non-null   int64  
-   
-Dari sekian banyak kolom di atas, terdapat missing value pada kolom release_date, video_release_date dan IMDb URL.   
-
+Dari sekian banyak kolom di atas, terdapat missing value pada kolom release_date, video_release_date dan IMDb URL.  
+Adapun penjelasan fitur dari variabel di atas
+- item_id: ID unik untuk setiap film dalam dataset. Kolom ini berguna untuk mengidentifikasi setiap film, memungkinkan analisis atau pencocokan antar-tabel jika dataset terdiri dari lebih dari satu tabel.
+- title: Judul film. Kolom ini menyimpan nama atau judul dari setiap film dalam dataset.
+- release_date: Tanggal rilis film. Informasi ini berguna untuk memahami periode ketika film dirilis dan mungkin untuk melihat tren preferensi berdasarkan era tertentu.
+- Genre film. Ini membantu dalam analisis preferensi pengguna berdasarkan genre. Genre yang ada adalah Action, Adventure, Animation, Children’s, Comedy, Crime, Documentary, Drama, Fantasy, Film-Noir, Horror, Musical, Mystery, Romance, Sci-Fi, Thriller, War, dan Western.
+- Video_release_date: Tanggal rilis video dari film tersebut. Kolom ini tidak memiliki data (0 non-null), sehingga bisa diabaikan atau dihapus dalam proses analisis karena tidak ada nilai yang tersedia untuk diolah.
+- IMDb URL: URL IMDb dari film. Kolom ini mengarah ke halaman IMDb, yang bisa berguna untuk mengambil informasi tambahan tentang film seperti sutradara, pemeran, atau ulasan. Namun, karena data ini tidak lengkap (hanya 1679 dari 1682 baris yang berisi data).
+     
 Dalam upaya memahami dataset MovieLens 100k, langkah yang diambil adalah melakukan Univariate Exploratory Data Analysis (EDA). Univariate EDA berfokus pada analisis satu variabel pada satu waktu untuk mendapatkan wawasan yang lebih dalam tentang distribusi dan karakteristik data. Beberapa tahapan yang dilakukan dalam analisis ini meliputi:
 1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi. Untuk lebih jelasnya dapat melihat histogram berikut ![image](https://github.com/user-attachments/assets/b64d1e9d-f9c5-4fac-9191-a2c0355304b2) Terlihat dari histogram tersebut, sebagian besar pengguna memberikan rating 4 dan rating 3
 2. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film. Ditunjukkan pada gambar berikut. ![image](https://github.com/user-attachments/assets/da169fa1-f57c-448e-b938-4d516db83eb2) Dari gambar tersebut dapat teramati untuk kelompok umur yang aktif adalah di pertengahan 20 hingga pertengahan 40.
@@ -124,6 +143,8 @@ Selanjutnya, kita hanya akan menggunakan data unik untuk dimasukkan ke dalam pro
 Setelah mengurutkan film dan memasukkannya ke dalam variabel film, kita perlu melakukan konversi data dari series menjadi list. Hal ini berguna untuk mempermudah pengolahan data dalam model rekomendasi.
 #### 7. Membuat dictionary
 Setelah kita memiliki list untuk user_id, item_id, title, dan genre, langkah selanjutnya adalah membuat dictionary. Dictionary ini akan membantu kita dalam menyimpan informasi terkait pengguna dan film dengan cara yang lebih terstruktur. Dengan mengurutkan data dan membuat dictionary, struktur data menjadi lebih jelas dan terorganisir. Hal ini memudahkan dalam mengakses dan memanipulasi data, sehingga proses pengembangan model rekomendasi menjadi lebih efisien.
+#### 8. Representasi Fitur dengan TF-IDF
+TF-IDF (Term Frequency-Inverse Document Frequency) ini digunakan untuk memberikan bobot pada setiap kata dalam genre film. TF-IDF membantu dalam menyoroti kata yang unik dalam genre tiap film, sehingga membuat representasi fitur dari setiap film dalam bentuk vektor. Implementasinya dengan cara menghitung nilai TF-IDF untuk setiap kata yang muncul dalam genre dari film. Setiap film akan direpresentasikan sebagai vektor dalam ruang fitur berbasis kata, dengan bobot TF-IDF yang menggambarkan kepentingan relatif kata tersebut.
 
 Tahapan data preparation memastikan bahwa dataset siap untuk dimasukkan ke dalam model rekomendasi. Ini mencakup pembuatan format data yang diperlukan untuk algoritma yang akan digunakan, seperti dalam pendekatan content-based filtering yang memanfaatkan fitur-fitur dari film. Dengan melalui tahapan data preparation ini, kami dapat memastikan bahwa sistem rekomendasi yang dibangun lebih efektif dan mampu memberikan rekomendasi yang relevan kepada pengguna berdasarkan preferensi mereka.
 
@@ -168,9 +189,11 @@ Proses Tuning:
 Precision@K mengukur proporsi rekomendasi yang relevan dari total K rekomendasi yang diberikan. Ini memberikan informasi tentang seberapa banyak rekomendasi yang dihasilkan sistem yang sesuai dengan preferensi pengguna.
 Rumusnya:
 Precision@K = Jumlah Rekomendasi Relevan 𝐾 / Jumlah Rekomendasi Relevan
-​#### 2. Recall@K
+​
+#### 2. Recall@K
 Recall@K mengukur seberapa banyak item relevan yang berhasil direkomendasikan dari total item relevan yang tersedia. Ini memberikan gambaran tentang kemampuan sistem untuk menangkap semua item relevan.
 Rumusnya: Recall@K = Jumlah Rekomendasi Relevan / Total Item Relevan
+
 #### 3. Mean Average Precision (MAP):
 MAP adalah rata-rata dari precision pada setiap titik di mana sebuah item relevan ditemukan. Ini memberikan gambaran yang lebih baik tentang kualitas model dalam memberikan rekomendasi.
 Rumusnya: MAP = 1/∣𝑄∣ ∑ 𝑞∈𝑄 AP(𝑞)
@@ -191,6 +214,14 @@ Hasil recall sebesar 1.0 menunjukkan bahwa semua item relevan yang seharusnya di
 MAP biasanya dinyatakan dalam rentang 0 hingga 1, sehingga nilai 5.0 tampaknya tidak konsisten dengan konvensi MAP. Jika ini adalah kesalahan pengetikan, maka seharusnya berada dalam rentang tersebut. Nilai MAP yang tinggi menunjukkan bahwa ketika sistem berhasil memberikan rekomendasi yang relevan, kualitas rekomendasi tersebut cukup baik. Namun, jika nilai ini benar-benar 5.0, ini perlu ditelusuri lebih lanjut, karena bisa jadi mencerminkan kesalahan dalam perhitungan atau pemahaman metrik.
 
 ### Kesimpulan
+Dari problem statement yang diuraikan bahwa adanya keterbatasan dalam menemukan film yang sesuai dengan preferensi pengguna di tengah banyaknya pilihan dan kurangnya personalisasi rekomendasi yang mempertimbangkan preferensi unik setiap pengguna, solusi yang ditawarkan adalah membangun model content-Based filtering berbasis similarity menggunakan algoritma machine learning serta tidak lupa untuk menambahkan metode evaluasi. Maka hasil yang diharapkan adalah dapat meningkatnya kemampuan sistem rekomendasi dalam menyaring pilihan film sesuai minat pengguna dan menyediakan rekomendasi yang lebih personal dengan menyesuaikan fitur konten film berdasarkan preferensi pengguna. Dari tabel berikut:
+Rekomendasi film yang mirip dengan 'Ridicule (1996)':
+|  |                                     title |
+|--|-------------------------------------------|
+|0 | Scream of Stone (Schrei aus Stein) (1991) |
+|1 |                       One Fine Day (1996) |
+Menunjukkan adanya dua rekomendasi film dari objek film Ridicule (1996). Ini cukup untuk memberikan variasi rekomendasi kepada pengguna, sebagai saran untuk menonton film yang kurang lebih bergenre sama dengan film Ridicule (1996).
+
 Dari data-data yang telah dilampirkan di atas secara keseluruhan, model ini memiliki potensi untuk memberikan dampak positif bagi pemahaman bisnis yang terkait dengan kepuasan dan pengalaman pengguna. Jika hasil evaluasi model menunjukkan performa yang baik, dapat disimpulkan bahwa solusi yang diterapkan sudah efektif dalam menjawab masalah utama dan mencapai tujuan yang diharapkan.
 
 
