@@ -58,7 +58,7 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
     - rating: Penilaian atau rating yang diberikan oleh pengguna untuk film tertentu, biasanya dalam rentang 1 hingga 5. Rating ini menunjukkan preferensi atau penilaian pengguna terhadap film tersebut.
     - timestamp: Waktu (dalam bentuk UNIX timestamp) saat rating tersebut diberikan. Ini memungkinkan analisis waktu, seperti tren penilaian atau perubahan preferensi pengguna dari waktu ke waktu.
 
-3. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
+2. u.user: File ini berisi informasi tentang penguna dengan 5 kolom, yaitu user_id, age, gender, occupation, dan zip_code dan memiliki 943 baris. Dengan rincian sebagai berikut:
    |   |  Column    |  Non-Null Count | Dtype| 
    |---|------------|-----------------|------|
    | 0 |  user_id   |  943 non-null   |int64 |
@@ -82,7 +82,8 @@ Dataset MovieLens 100k memiliki 3 file utama, ketiga file inilah yang digunakan 
      - occupation : Pekerjaan pengguna. Ini dapat digunakan untuk analisis preferensi berdasarkan pekerjaan atau profesi.
      - zip_code : Kode pos pengguna. Data lokasi dapat memberikan informasi tentang preferensi film berdasarkan wilayah atau area geografis.
        
-5. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
+3. u.item: File ini berisi informasi tentang film dengan 3 kolom, yaitu movie_id, title, dan genres dan memiliki 1681 baris. Dari data di atas kita mengetahui jumlah masing-masing dari jenis genre film yang ada. kita memiliki 943 pengguna dari 1682 film yang memiliki rating. Dengan rincian sebagai berikut:
+   
 |   |  Column            | Non-Null Count|  Dtype   |
 |---|--------------------|---------------|----------|  
 | 0 |  item_id           |  1682 non-null|   int64  | 
