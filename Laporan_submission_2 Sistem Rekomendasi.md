@@ -189,8 +189,9 @@ Nilai precision sebesar 0.2 berarti bahwa dari 5 rekomendasi yang diberikan, han
 Hasil recall sebesar 1.0 menunjukkan bahwa semua item relevan yang seharusnya direkomendasikan berhasil ditangkap oleh sistem. Artinya, sistem sangat efektif dalam menemukan dan merekomendasikan semua item relevan dari data yang tersedia. Namun, recall yang tinggi ini datang dengan trade-off pada precision yang rendah.
 #### Mean Average Precision (MAP 5.0):
 MAP biasanya dinyatakan dalam rentang 0 hingga 1, sehingga nilai 5.0 tampaknya tidak konsisten dengan konvensi MAP. Jika ini adalah kesalahan pengetikan, maka seharusnya berada dalam rentang tersebut. Nilai MAP yang tinggi menunjukkan bahwa ketika sistem berhasil memberikan rekomendasi yang relevan, kualitas rekomendasi tersebut cukup baik. Namun, jika nilai ini benar-benar 5.0, ini perlu ditelusuri lebih lanjut, karena bisa jadi mencerminkan kesalahan dalam perhitungan atau pemahaman metrik.
+
 ### Kesimpulan
-Dari analisis metrik evaluasi di atas, sistem rekomendasi menunjukkan hasil yang mencolok. Meski recall sangat baik, sistem gagal dalam memberikan rekomendasi yang relevan secara tepat, terlihat dari rendahnya precision. Hal ini menunjukkan bahwa sistem mampu menemukan semua item relevan yang ada, tetapi juga merekomendasikan banyak item yang tidak sesuai dengan preferensi pengguna.
+Dari data-data yang telah dilampirkan di atas secara keseluruhan, model ini memiliki potensi untuk memberikan dampak positif bagi pemahaman bisnis yang terkait dengan kepuasan dan pengalaman pengguna. Jika hasil evaluasi model menunjukkan performa yang baik, dapat disimpulkan bahwa solusi yang diterapkan sudah efektif dalam menjawab masalah utama dan mencapai tujuan yang diharapkan.
 
 
 **---Ini adalah bagian akhir laporan---**
