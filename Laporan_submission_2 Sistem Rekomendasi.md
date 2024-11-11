@@ -121,9 +121,23 @@ Adapun penjelasan fitur dari variabel di atas
 - IMDb URL: URL IMDb dari film. Kolom ini mengarah ke halaman IMDb, yang bisa berguna untuk mengambil informasi tambahan tentang film seperti sutradara, pemeran, atau ulasan. Namun, karena data ini tidak lengkap (hanya 1679 dari 1682 baris yang berisi data).
      
 Dalam upaya memahami dataset MovieLens 100k, langkah yang diambil adalah melakukan Univariate Exploratory Data Analysis (EDA). Univariate EDA berfokus pada analisis satu variabel pada satu waktu untuk mendapatkan wawasan yang lebih dalam tentang distribusi dan karakteristik data. Beberapa tahapan yang dilakukan dalam analisis ini meliputi:
-1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi. Untuk lebih jelasnya dapat melihat histogram berikut ![image](https://github.com/user-attachments/assets/b64d1e9d-f9c5-4fac-9191-a2c0355304b2) Terlihat dari histogram tersebut, sebagian besar pengguna memberikan rating 4 dan rating 3
-2. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film. Ditunjukkan pada gambar berikut. ![image](https://github.com/user-attachments/assets/da169fa1-f57c-448e-b938-4d516db83eb2) Dari gambar tersebut dapat teramati untuk kelompok umur yang aktif adalah di pertengahan 20 hingga pertengahan 40.
-3. Visualisasi Genre Film: Dengan menggunakan diagram lingkaran atau grafik batang, kita dapat menganalisis proporsi berbagai genre film dalam dataset. Ini akan memberikan gambaran tentang genre mana yang paling banyak tersedia dan bagaimana distribusi genre film dapat mempengaruhi preferensi pengguna. ![image](https://github.com/user-attachments/assets/52b6d6aa-7267-4282-8413-6435e3975257) ![image](https://github.com/user-attachments/assets/6fd7219b-0540-4d21-948d-d6c43dc217c8)
+1. Analisis Distribusi Rating: Untuk memahami sebaran penilaian yang diberikan oleh pengguna, kita dapat menggunakan histogram untuk memvisualisasikan frekuensi setiap nilai rating (1 hingga 5). Ini membantu dalam mengidentifikasi apakah ada bias dalam penilaian, misalnya, jika sebagian besar pengguna cenderung memberikan penilaian tinggi. Untuk lebih jelasnya dapat melihat histogram berikut
+
+![image](https://github.com/user-attachments/assets/b64d1e9d-f9c5-4fac-9191-a2c0355304b2)
+
+Terlihat dari histogram tersebut, sebagian besar pengguna memberikan rating 4 dan rating 3
+
+2. Analisis Usia Pengguna: Untuk variabel usia dari pengguna, kita dapat menggunakan box plot untuk melihat sebaran usia dan mengidentifikasi outlier. Ini memberikan wawasan mengenai kelompok umur mana yang paling aktif dalam memberikan penilaian film. Ditunjukkan pada gambar berikut. 
+
+![image](https://github.com/user-attachments/assets/da169fa1-f57c-448e-b938-4d516db83eb2) 
+
+Dari gambar tersebut dapat teramati untuk kelompok umur yang aktif adalah di pertengahan 20 hingga pertengahan 40.
+
+3. Visualisasi Genre Film: Dengan menggunakan diagram lingkaran atau grafik batang, kita dapat menganalisis proporsi berbagai genre film dalam dataset. Ini akan memberikan gambaran tentang genre mana yang paling banyak tersedia dan bagaimana distribusi genre film dapat mempengaruhi preferensi pengguna.
+
+![image](https://github.com/user-attachments/assets/52b6d6aa-7267-4282-8413-6435e3975257) 
+![image](https://github.com/user-attachments/assets/6fd7219b-0540-4d21-948d-d6c43dc217c8)
+
 4. Statistik Deskriptif: Selain visualisasi, perhitungan statistik deskriptif seperti mean, median, modus, dan rentang juga dilakukan untuk memberikan ringkasan numerik dari variabel yang ada. Ini akan memberikan gambaran tentang pusat, penyebaran, dan bentuk distribusi data. Untuk data rating ditunjukkan sebagai berikut:
 - Mean Rating: 3.52986
 - Median Rating: 4.0
